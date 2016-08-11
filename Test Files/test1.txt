@@ -1,0 +1,9 @@
+Once upon a time a guy named Juan took his OS and Networking
+class and had this homework he had to recreate the wc program
+written in C code, this guy Juan decided to create his own test
+files, thats why he's writing this!
+Juan went way too far since he could download the files from any webpage or maybe
+just use some example files, but no, Juan is not like that, he went all in with the creation of the example texts in order to see
+if his program ran correctly.
+Lets wish Juan the best of luck!
+The End.
