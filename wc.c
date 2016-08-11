@@ -3,6 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+void printResults(int lines, int words, int chars, int bytes,int lineFlag,int wordFlag,int charFlag,int byteFlag, char* filename){
+  printf(" ");
+
+  if (lineFlag==1) {printf("%d\t",lines);};
+  if (wordFlag==1) {printf("%d\t",words);};
+  if (charFlag==1) {printf("%d\t",chars);};
+  if (byteFlag==1) {printf("%d\t ",bytes);};
+
+  if(lineFlag == 0 && wordFlag == 0 && charFlag == 0 && byteFlag == 0){
+    printf("%d\t%d\t%d\t",lines,words,chars);
+  }
+
+  printf("%s\n",filename);
+}
+
 int main(int argc, char** argv)
 {
     FILE *file;
@@ -111,19 +126,4 @@ int main(int argc, char** argv)
       }
     }
     return 0;
-}
-
-void printResults(int lines, int words, int chars, int bytes,int lineFlag,int wordFlag,int charFlag,int byteFlag, char* filename){
-  printf(" ");
-
-  if (lineFlag==1) {printf("%d\t",lines);};
-  if (wordFlag==1) {printf("%d\t",words);};
-  if (charFlag==1) {printf("%d\t",chars);};
-  if (byteFlag==1) {printf("%d\t ",bytes);};
-
-  if(lineFlag == 0 && wordFlag == 0 && charFlag == 0 && byteFlag == 0){
-    printf("%d\t%d\t%d\t",lines,words,chars);
-  }
-
-  printf("%s\n",filename);
 }
