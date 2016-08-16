@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 #include <string.h>
 
 void printResults(int lines, int words, int chars, int bytes,int lineFlag,int wordFlag,int charFlag,int byteFlag, char* filename){
@@ -65,8 +66,8 @@ int main(int argc, char** argv)
               wordFlag = 1;
               break;
             default:
-              printf("[ERROR] Invalid argument: '%s'\n",argv[i]);
-              returnValue = 1;
+              printf("invalid option -- '%s'\n",argv[i]);
+              return 1;
               break;
           }
         }
@@ -120,7 +121,7 @@ int main(int argc, char** argv)
       }
       else
       {
-          printf("[ERROR] File not found: '%s'\n",argv[arg]);
+          fprintf(stderr,"%s: %s\n",argv[arg],strerror(errno));
           returnValue = 1; //SE ASUME QUE SI UNO DE LOS ARCHIVOS NO EXISTE, SERA UN ERROR
 				//PERO SEGUIRA CORRIENDO EL PROGRAMA HASTA FINALIZAR
 				//RETORNANDO UN 1 YA QUE FALLO

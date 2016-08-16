@@ -24,3 +24,7 @@ ASSUMPTIONS:
 1)Files are written with 1byte chars (US-ASCII)
 2)If -m and -c are passed together as arguments, only the last one entered will take effect (since -m and -c are the same under assumption #1)
 3)If no arguments are given as input, the program will return total lines, words and chars automatically (like the actual wc)
+
+---
+
+For more info, check github repository: https://github.com/jparevalo/WC-Implementation
