@@ -21,6 +21,7 @@ void printResults(int lines, int words, int chars, int bytes,int lineFlag,int wo
 int main(int argc, char** argv)
 {
     FILE *file;
+    int returnValue = 0;
     int byteCount = 0;
     int lineCount = 0;
     int charCount = 0;
@@ -64,8 +65,8 @@ int main(int argc, char** argv)
               wordFlag = 1;
               break;
             default:
-              printf("[ERROR] Invalid argument: '%s'.\n",argv[i]);
-              return 1;
+              printf("[ERROR] Invalid argument: '%s'\n",argv[i]);
+              returnValue = 1;
               break;
           }
         }
@@ -83,7 +84,7 @@ int main(int argc, char** argv)
       wordCount = 0;
       file = fopen(argv[arg], "r");
       if (file){
-        const size_t line_size = 300;
+        const size_t line_size = 400;
         char* readLine = malloc(line_size);
         while (fgets(readLine, line_size, file) != NULL){
               for (i = 0; i < strlen(readLine); i++){
@@ -100,9 +101,12 @@ int main(int argc, char** argv)
                   //SUPUESTO SIN BONUS: CHAR = 1BYTE
                   byteCount++;
               }
-              if(readLine[i]=='\0' && i != 299){
+              if(readLine[i]=='\0' && i != 399){
                 lineCount++;
               }
+          }
+          if(wordCount==0 && isInsideWord==1){
+            wordCount = 1;
           }
           free(readLine);
           totalByteCount += byteCount;
@@ -112,18 +116,18 @@ int main(int argc, char** argv)
 
           printResults(lineCount,wordCount,charCount,byteCount,lineFlag,wordFlag,charFlag,byteFlag,argv[arg]);
 
-
-          if(arg == argc-1 && startingFile != arg){
-            printResults(totalLineCount,totalWordCount,totalCharCount,totalByteCount,lineFlag,wordFlag,charFlag,byteFlag,"total");
-          }
-
           fclose(file);
       }
       else
       {
-          printf("[ERROR] File not found: '%s'.\n",argv[arg]);
-          return 1; //SE ASUME QUE SI UNO DE LOS ARCHIVOS NO EXISTE, SERA UN ERROR Y TERMINARA LA EJECUCION
+          printf("[ERROR] File not found: '%s'\n",argv[arg]);
+          returnValue = 1; //SE ASUME QUE SI UNO DE LOS ARCHIVOS NO EXISTE, SERA UN ERROR
+				//PERO SEGUIRA CORRIENDO EL PROGRAMA HASTA FINALIZAR
+				//RETORNANDO UN 1 YA QUE FALLO
+      }
+      if(arg == argc-1 && startingFile != arg){
+        printResults(totalLineCount,totalWordCount,totalCharCount,totalByteCount,lineFlag,wordFlag,charFlag,byteFlag,"total");
       }
     }
-    return 0;
+    return returnValue;
 }
